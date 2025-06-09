@@ -1,0 +1,26 @@
+project:
+  type: book
+
+book:
+  title: "SQL Fundamentals with BigQuery"
+  author: "Rafael Saraiva"
+  date: "6/8/2025"
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - sql-basics.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+  pdf:
+    documentclass: scrreprt
+
+
+
