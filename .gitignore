@@ -3,3 +3,4 @@ __tutorial
 /.quarto/
 bqsql_book/_book/*
 bqsql_book/.quarto/*
+src/.quarto/*

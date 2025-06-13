@@ -7,13 +7,6 @@
     "text": "References"
   },
   {
-    "objectID": "src/index.html",
-    "href": "src/index.html",
-    "title": "Preface",
-    "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
-  },
-  {
     "objectID": "src/intro.html",
     "href": "src/intro.html",
     "title": "Introduction",
@@ -21,11 +14,25 @@
     "text": "Introduction\nThis is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming."
   },
   {
-    "objectID": "src/sql-basics.html",
-    "href": "src/sql-basics.html",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Preface",
+    "section": "",
+    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books."
+  },
+  {
+    "objectID": "sql-basics.html",
+    "href": "sql-basics.html",
     "title": "The First Steps",
     "section": "",
     "text": "In SQL there is a subset of knowledge that is focused on retrieving data from tables. This is called DQL (Data Query Language).\nBigquery is a very DQL-centric database, by this way our queries are optimized to SELECT information (columns) from tables so we can perform analysis and use this data to help us answer questions by data-centric way.\nTo retrieve information from a table, we need to inform for the query engine which table we want to retrieve information FROM\nThis leads us for the most basic command to retrieve information from any SQL based databases:\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\nSELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. Even that this technique looks easy and without effort, it’s normally not optimal to run it to queries that contains a high number os columns since it may increase the cloud cost significantly due to the usage of computational resources.\n\nAnother important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing taxi-drives, maybe we want to analyze the rides of a specific city. This can be done with the following query:\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\nWHERE country = \"BR\"\nTo reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About\nThis is a book to learn SQL on Bigquery"
   },
   {
     "objectID": "src/summary.html",
