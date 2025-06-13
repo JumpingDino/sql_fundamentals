@@ -1,1 +1,0 @@
-Sitemap: https://JumpingDino.github.io/sql_fundamentals/sitemap.xml
