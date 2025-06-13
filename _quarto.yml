@@ -10,8 +10,8 @@ book:
   title: "SQL Fundamentals with BigQuery"
   chapters:
     - index.qmd
-    - sql-basics.qmd
     - about.qmd
+    - sql-basics.qmd
 
 format:
   html:
