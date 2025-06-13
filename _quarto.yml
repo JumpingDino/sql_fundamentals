@@ -1,7 +1,10 @@
 project:
   type: website
   output-dir: docs
-
+  render: 
+    - index.qmd
+    - about.qmd
+    - sql-basics.qmd
 website:
   title: "SQL Fundamentals with BigQuery"
   navbar:
