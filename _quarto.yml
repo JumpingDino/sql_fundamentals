@@ -7,7 +7,7 @@ project:
     - sql-basics.qmd
 
 book:
-  title: "SQL Fundamentals with BigQuery - BOOK"
+  title: "SQL Fundamentals with BigQuery"
   chapters:
     - index.qmd
     - sql-basics.qmd
