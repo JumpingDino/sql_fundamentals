@@ -12,6 +12,7 @@ jupyter: python3
 
 SQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]
 
+![Subset of commands on SQL](images/subset_sql.png){width=85% fig-align="center" fig-cap="Subset of SQL languages"}
 
 In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL is important so the actor can retrieve the data in a way it will help us answer questions by an analytical approach. 
 
@@ -29,6 +30,8 @@ from utils import custom_display_sql
 query = """
 SELECT * FROM `bigquery-public-data.openaq.global_air_quality`
 """
+
+custom_display_sql(query)
 ```
 
 SELECT * is known as "SELECT star" and is a way to fetch all the columns from the table. Even that this technique looks easy and without effort, it's normally not optimal to run it to queries that contains a high number os columns since it may increase the cloud cost significantly due to the usage of computational resources.
@@ -46,6 +49,7 @@ query = """
 SELECT * FROM `bigquery-public-data.openaq.global_air_quality`
 WHERE country = "BR"
 """
+custom_display_sql(query)
 ```
 
 To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to 
