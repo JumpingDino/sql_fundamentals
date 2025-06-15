@@ -42,8 +42,7 @@ To reduce the usage of computational resources (costs), one way is to filter the
 #| echo: False
 
 # with this I can hide the code that is used
-from IPython.display import display, Markdown,  HTML
-import pandas as pd
+from utils import format_sql
 
 query = """
 SELECT 
@@ -59,7 +58,7 @@ LIMIT 10;
 """
 
 # Wrap it in code block markdown with SQL
-display(Markdown(f"```sql\n{query}\n```"))
+custom_display_sql(query)
 
 data = pd.DataFrame(
     [
@@ -70,5 +69,5 @@ data = pd.DataFrame(
     columns = ['numbers', 'plus_one', 'square']
 )
 
-HTML(data.to_html(index=False))
+custom_display_df(data)
 ```
