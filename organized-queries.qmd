@@ -1,0 +1,129 @@
+---
+title: "The First Steps"
+format:
+  html:
+    toc: true
+    toc-expand: true
+    code-fold: false
+    code-tools: false
+jupyter: python3
+---
+
+
+# Subsets of SQL Commands
+
+SQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]
+
+![Subset of commands on SQL](images/subset_sql.png){width=85% fig-align="center" fig-cap="Subset of SQL languages"}
+<!-- [![Elephant](elephant.png)](https://en.wikipedia.org/wiki/Elephant) -->
+
+In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL commands are important so the actor can retrieve the data in a way it will help us answer questions with an analytical approach. 
+
+# DQL Commands
+
+In this section, we introduce the most basic commands that are necessary to run your first queries. We recommend you to run these commands on BigQuery so you can experience your first data retrievals and get used to the UI and langauge.
+
+## FROM
+
+In Bigquery, it's necessary to point out which table you want to take data **FROM**. Every table in bigquery has a table_id, a unique identifier of the table that consists of 3 parts.
+
+```
+table_id = {project_id}.{dataset_id}.{table_name}
+```
+
+- *project_id*: this is the project in  which all Google resources are grouped.
+- *dataset_id*: is a unique identifier of the containers of tables. Datasets are group of tables and views which facilitates the management of access through them 
+- *table_name*: the table_name is uniquely definied in a dataset.
+
+This leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it's important to understand which table we are fetching the data
+
+```{python}
+#| echo: False
+
+from utils import custom_display_sql
+query = """
+FROM `bigquery-public-data.openaq.global_air_quality`
+"""
+custom_display_sql(query)
+```
+
+## SELECT
+
+After pointing out the table, it's necessary to tell the bigquery engine which columns we want to retrieve with the **SELECT** command
+
+Bigquery is a very DQL-centric database, by this way our queries are optimized to **SELECT** information (columns) from tables and manipulate them accordingly.
+
+Leading us for the first functional code block:
+
+```{python}
+#| echo: False
+
+from utils import custom_display_sql
+
+query = """
+SELECT * FROM `bigquery-public-data.openaq.global_air_quality`
+"""
+
+custom_display_sql(query)
+```
+
+
+SELECT * is known as "SELECT star" and is a way to fetch all the columns from the table. This technique looks easy and efortless, however it's not optimal to run this to retrieve information from table that are too big since it may increase the cloud cost significantly due to the usage of computational resources.
+
+## AS
+
+XXX
+
+## WHERE
+
+Another important command to learn is the filtering functionality "WHERE". With this command we may filter out results for the author's analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:
+
+```{python}
+#| echo: False
+
+from utils import custom_display_sql
+
+query = """
+SELECT * FROM `bigquery-public-data.openaq.global_air_quality`
+WHERE country = "BR"
+"""
+custom_display_sql(query)
+```
+
+To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to 
+-- Sometimes you are going to be dealing with huge number of data, this is why it's important to filter, or to limit the data.
+
+```{python}
+#| echo: False
+
+# with this I can hide the code that is used
+import pandas as pd
+from utils import custom_display_sql, custom_display_df
+
+query = """
+SELECT 
+    user_id
+    , COUNT(*) as total
+FROM 
+    `project.dataset.table`
+WHERE 
+    event_date >= '2024-01-01'
+GROUP BY user_id
+ORDER BY total DESC
+LIMIT 10;
+"""
+
+# Wrap it in code block markdown with SQL
+custom_display_sql(query)
+
+data = pd.DataFrame(
+    [
+        [1,2,1],
+        [2,3,4],
+        [3,4,9]
+    ],
+    columns = ['numbers', 'plus_one', 'square']
+)
+
+custom_display_df(data)
+```
