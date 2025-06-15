@@ -20,6 +20,4 @@ format:
     css: styles.css
     toc: true
     toc-expand: 5
-
-crossref:
-  chapters: false
+    number-sections: false
