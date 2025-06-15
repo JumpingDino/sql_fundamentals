@@ -2,6 +2,8 @@
 title: "The First Steps"
 format:
   html:
+    toc: true
+    toc-expand: true
     code-fold: false
     code-tools: false
 jupyter: python3

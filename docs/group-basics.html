@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – SQL Fundamentals with BigQuery</title>
+<title>2&nbsp; Grouping the Data – SQL Fundamentals with BigQuery</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sql-basics.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./sql-basics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -83,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./about.html">About</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./group-basics.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grouping the Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./about.html" class="sidebar-item-text sidebar-link active">
+  <a href="./about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About</span></a>
   </div>
 </li>
@@ -128,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./group-basics.html" class="sidebar-item-text sidebar-link">
+  <a href="./group-basics.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grouping the Data</span></span></a>
   </div>
 </li>
@@ -137,15 +136,33 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#grouping-the-data" id="toc-grouping-the-data" class="nav-link active" data-scroll-target="#grouping-the-data"><span class="header-section-number">3</span> Grouping the data</a></li>
+  <li><a href="#aggregate-functions" id="toc-aggregate-functions" class="nav-link" data-scroll-target="#aggregate-functions"><span class="header-section-number">4</span> Aggregate functions</a>
+  <ul class="collapse">
+  <li><a href="#min" id="toc-min" class="nav-link" data-scroll-target="#min"><span class="header-section-number">4.1</span> MIN</a></li>
+  <li><a href="#max" id="toc-max" class="nav-link" data-scroll-target="#max"><span class="header-section-number">4.2</span> MAX</a></li>
+  <li><a href="#std" id="toc-std" class="nav-link" data-scroll-target="#std"><span class="header-section-number">4.3</span> STD</a></li>
+  <li><a href="#avg" id="toc-avg" class="nav-link" data-scroll-target="#avg"><span class="header-section-number">4.4</span> AVG</a></li>
+  </ul></li>
+  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter"><span class="header-section-number">5</span> Filter</a>
+  <ul class="collapse">
+  <li><a href="#filter-using-where" id="toc-filter-using-where" class="nav-link" data-scroll-target="#filter-using-where"><span class="header-section-number">5.0.1</span> Filter using WHERE</a></li>
+  <li><a href="#filter-using-having" id="toc-filter-using-having" class="nav-link" data-scroll-target="#filter-using-having"><span class="header-section-number">5.0.2</span> Filter using HAVING</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Grouping the Data</span></h1>
 </div>
 
 
@@ -162,9 +179,38 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is a book to learn SQL on Bigquery</p>
+<section id="grouping-the-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Grouping the data</h1>
+<p>[Explain that grouping changes the structure of the data]</p>
+<p>[Create an example]</p>
+</section>
+<section id="aggregate-functions" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Aggregate functions</h1>
+<section id="min" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="min"><span class="header-section-number">4.1</span> MIN</h2>
+</section>
+<section id="max" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="max"><span class="header-section-number">4.2</span> MAX</h2>
+</section>
+<section id="std" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="std"><span class="header-section-number">4.3</span> STD</h2>
+</section>
+<section id="avg" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="avg"><span class="header-section-number">4.4</span> AVG</h2>
+</section>
+</section>
+<section id="filter" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Filter</h1>
+<p>[Filtering may happen before or after the grouping, and this may affect the results]</p>
+<section id="filter-using-where" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="filter-using-where"><span class="header-section-number">5.0.1</span> Filter using WHERE</h3>
+</section>
+<section id="filter-using-having" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="filter-using-having"><span class="header-section-number">5.0.2</span> Filter using HAVING</h3>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -568,14 +614,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./sql-basics.html" class="pagination-link" aria-label="The First Steps">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The First Steps</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sql-basics.html" class="pagination-link" aria-label="The First Steps">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The First Steps</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
