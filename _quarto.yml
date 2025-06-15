@@ -12,6 +12,7 @@ book:
     - index.qmd
     - about.qmd
     - sql-basics.qmd
+    - group-basics.qmd
 
 format:
   html:
