@@ -10,12 +10,12 @@ def custom_display_sql(query_str):
         None
     """
 
-    display(Markdown(f"```sql\n{sqlfluff.fix(query_str)}\n```"))
+    display(Markdown(f"```sql\n{sqlfluff.fix(query_str)[1:]}\n```"))
 
     return None
 
 
-def custom_display_sql(df: pd.DataFrame, title: str = None):
+def custom_display_df(df: pd.DataFrame, title: str = None):
     """Display a DataFrame with a title.
 
     Args:

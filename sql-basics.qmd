@@ -42,7 +42,8 @@ To reduce the usage of computational resources (costs), one way is to filter the
 #| echo: False
 
 # with this I can hide the code that is used
-from utils import format_sql
+import pandas as pd
+from utils import custom_display_sql, custom_display_df
 
 query = """
 SELECT 
@@ -70,4 +71,25 @@ data = pd.DataFrame(
 )
 
 custom_display_df(data)
+```
+
+```{python}
+import sqlfluff
+
+query = """
+SELECT 
+    user_id
+    , COUNT(*) as total
+FROM 
+    `project.dataset.table`
+WHERE 
+    event_date >= '2024-01-01'
+GROUP BY user_id
+ORDER BY total DESC
+LIMIT 10;
+"""
+
+# print(sqlfluff.fix(query)[1:])
+
+print(f"```sql\n{sqlfluff.fix(query)[1:]}\n```")
 ```
