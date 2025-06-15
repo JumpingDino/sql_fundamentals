@@ -204,15 +204,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>SQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/subset_sql.png" class="img-fluid figure-img" style="width:60.0%"></p>
-<figcaption>Descriptive alt text</figcaption>
+<p><img src="images/subset_sql.png" class="img-fluid figure-img" style="width:85.0%"></p>
+<figcaption>Subset of commands on SQL</figcaption>
 </figure>
 </div>
 <p>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL is important so the actor can retrieve the data in a way it will help us answer questions by an analytical approach.</p>
 <p>Bigquery is a very DQL-centric database, by this way our queries are optimized to <strong>SELECT</strong> information (columns) from tables so we can perform analysis and use this data to help us answer questions by data-centric way.</p>
 <p>To retrieve information from a table, we need to inform for the query engine which table we want to retrieve information <strong>FROM</strong></p>
 <p>This leads us for the most basic command to fetch information from any SQL based databases:</p>
-<div id="9150b8e8" class="cell" data-execution_count="1">
+<div id="bf74e023" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -220,14 +220,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>SELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. Even that this technique looks easy and without effort, it’s normally not optimal to run it to queries that contains a high number os columns since it may increase the cloud cost significantly due to the usage of computational resources.</p>
 <p><add figure="" of="" bq="" making="" computations=""></add></p>
 <p>Another important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing taxi-drives, maybe we want to analyze the rides of a specific city. This can be done with the following query:</p>
-<div id="df0d900c" class="cell" data-execution_count="2">
+<div id="4ba2709a" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="ot">"BR"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.</p>
-<div id="2e12bb30" class="cell" data-execution_count="3">
+<div id="50861594" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    user_id</span>
@@ -749,7 +749,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>SQL is a broad language with commands for <span class="co">[</span><span class="ot">Introduce about DDL, DQL, DML, DCL and TCL</span><span class="co">]</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="al">![Descriptive alt text](images/subset_sql.png)</span>{width=60% fig-align="center" fig-cap="Subset of SQL languages"}</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="al">![Subset of commands on SQL](images/subset_sql.png)</span>{width=85% fig-align="center" fig-cap="Subset of SQL languages"}</span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL is important so the actor can retrieve the data in a way it will help us answer questions by an analytical approach. </span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
