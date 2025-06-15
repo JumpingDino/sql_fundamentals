@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; The Basics of DQL – SQL Fundamentals with BigQuery</title>
+<title>1&nbsp; Basic SQL – SQL Fundamentals with BigQuery</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -120,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql-basics.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of DQL</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql-basics.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic SQL</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./sql-basics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of DQL</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic SQL</span></span></a>
   </div>
 </li>
     </ul>
@@ -173,7 +173,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-first-tools" id="toc-the-first-tools" class="nav-link active" data-scroll-target="#the-first-tools"><span class="header-section-number">2</span> The First Tools</a></li>
+  <li><a href="#subsets-of-sql-commands" id="toc-subsets-of-sql-commands" class="nav-link active" data-scroll-target="#subsets-of-sql-commands"><span class="header-section-number">2</span> Subsets of SQL Commands</a></li>
+  <li><a href="#dql-commands" id="toc-dql-commands" class="nav-link" data-scroll-target="#dql-commands"><span class="header-section-number">3</span> DQL Commands</a>
+  <ul class="collapse">
+  <li><a href="#from" id="toc-from" class="nav-link" data-scroll-target="#from"><span class="header-section-number">3.1</span> FROM</a></li>
+  <li><a href="#select-and-from" id="toc-select-and-from" class="nav-link" data-scroll-target="#select-and-from"><span class="header-section-number">3.2</span> SELECT and FROM</a></li>
+  <li><a href="#as" id="toc-as" class="nav-link" data-scroll-target="#as"><span class="header-section-number">3.3</span> AS</a></li>
+  <li><a href="#where" id="toc-where" class="nav-link" data-scroll-target="#where"><span class="header-section-number">3.4</span> WHERE</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -182,7 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">The Basics of DQL</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Basic SQL</span></h1>
 </div>
 
 
@@ -199,46 +206,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-first-tools" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> The First Tools</h1>
+<section id="subsets-of-sql-commands" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Subsets of SQL Commands</h1>
 <p>SQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/subset_sql.png" class="img-fluid figure-img" style="width:85.0%"></p>
-<figcaption>Subset of commands on SQL</figcaption>
-</figure>
-</div>
-<p>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL is important so the actor can retrieve the data in a way it will help us answer questions by an analytical approach.</p>
-<p>Bigquery is a very DQL-centric database, by this way our queries are optimized to <strong>SELECT</strong> information (columns) from tables so we can perform analysis and use this data to help us answer questions by data-centric way.</p>
-<p>To retrieve information from a table, we need to inform for the query engine which table we want to retrieve information <strong>FROM</strong></p>
-<p>This leads us for the most basic command to fetch information from any SQL based databases:</p>
-<div id="bf74e023" class="cell" data-execution_count="1">
+<p><img src="images/subset_sql.png" class="img-fluid quarto-figure quarto-figure-center" style="width:85.0%" data-fig-cap="Subset of SQL languages" alt="Subset of commands on SQL"> <!-- [![Elephant](elephant.png)](https://en.wikipedia.org/wiki/Elephant) --></p>
+<p>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL commands are important so the actor can retrieve the data in a way it will help us answer questions with an analytical approach.</p>
+</section>
+<section id="dql-commands" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> DQL Commands</h1>
+<p>In this section, we introduce the most basic commands that are necessary to run your first queries. We recommend you to run these commands on BigQuery so you can experience your first data retrievals and get used to the UI and langauge.</p>
+<section id="from" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="from"><span class="header-section-number">3.1</span> FROM</h2>
+<p>In Bigquery, it’s necessary to point out which table you want to take data <strong>FROM</strong>. Every table in bigquery has a table_id, a unique identifier of the table that consists of 3 parts.</p>
+<pre><code>table_id = {project_id}.{dataset_id}.{table_name}</code></pre>
+<ul>
+<li><em>project_id</em>: this is the project in which all Google resources are grouped.</li>
+<li><em>dataset_id</em>: is a unique identifier of the containers of tables. Datasets are group of tables and views which facilitates the management of access through them</li>
+<li><em>table_name</em>: the table_name is uniquely definied in a dataset.</li>
+</ul>
+<p>This leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it’s important to understand which table we are fetching the data</p>
+<div id="09f5c388" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>SELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. Even that this technique looks easy and without effort, it’s normally not optimal to run it to queries that contains a high number os columns since it may increase the cloud cost significantly due to the usage of computational resources.</p>
-<p><add figure="" of="" bq="" making="" computations=""></add></p>
-<p>Another important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing taxi-drives, maybe we want to analyze the rides of a specific city. This can be done with the following query:</p>
-<div id="4ba2709a" class="cell" data-execution_count="2">
+</section>
+<section id="select-and-from" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="select-and-from"><span class="header-section-number">3.2</span> SELECT and FROM</h2>
+<p>After pointing out the table, it’s necessary to tell the bigquery engine which columns we want to retrieve with the <strong>SELECT</strong> command</p>
+<p>Bigquery is a very DQL-centric database, by this way our queries are optimized to <strong>SELECT</strong> information (columns) from tables and manipulate them accordingly.</p>
+<p>Leading us for the first functional code block:</p>
+<div id="55aa372c" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="ot">"BR"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>SELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. This technique looks easy and efortless, however it’s not optimal to run this to retrieve information from table that are too big since it may increase the cloud cost significantly due to the usage of computational resources.</p>
+</section>
+<section id="as" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="as"><span class="header-section-number">3.3</span> AS</h2>
+<p>XXX</p>
+</section>
+<section id="where" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="where"><span class="header-section-number">3.4</span> WHERE</h2>
+<p>Another important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:</p>
+<div id="89c15eab" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="ot">"BR"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.</p>
-<div id="50861594" class="cell" data-execution_count="3">
+<div id="37756e78" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    user_id</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    , <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> total</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    `project.dataset.table`</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    event_date <span class="op">&gt;=</span> <span class="st">'2024-01-01'</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> user_id</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total <span class="kw">DESC</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    user_id</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    , <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> total</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    `project.dataset.table`</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    event_date <span class="op">&gt;=</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> user_id</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total <span class="kw">DESC</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell-output cell-output-display">
 <table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
@@ -271,8 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-<!-- -->
-
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -345,57 +374,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         container: window.document.getElementById('quarto-embedded-source-code-modal')
       });
       clipboardModal.on('success', onCopySuccess);
-    }
-    const viewSource = window.document.getElementById('quarto-view-source') ||
-                       window.document.getElementById('quarto-code-tools-source');
-    if (viewSource) {
-      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-      viewSource.addEventListener("click", function(e) {
-        if (sourceUrl) {
-          // rstudio viewer pane
-          if (/\bcapabilities=\b/.test(window.location)) {
-            window.open(sourceUrl);
-          } else {
-            window.location.href = sourceUrl;
-          }
-        } else {
-          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-          modal.show();
-        }
-        return false;
-      });
-    }
-    function toggleCodeHandler(show) {
-      return function(e) {
-        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-        for (let i=0; i<detailsSrc.length; i++) {
-          const details = detailsSrc[i].parentElement;
-          if (show) {
-            details.open = true;
-          } else {
-            details.removeAttribute("open");
-          }
-        }
-        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-        const fromCls = show ? "hidden" : "unhidden";
-        const toCls = show ? "unhidden" : "hidden";
-        for (let i=0; i<cellCodeDivs.length; i++) {
-          const codeDiv = cellCodeDivs[i];
-          if (codeDiv.classList.contains(fromCls)) {
-            codeDiv.classList.remove(fromCls);
-            codeDiv.classList.add(toCls);
-          } 
-        }
-        return false;
-      }
-    }
-    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-    if (hideAllCode) {
-      hideAllCode.addEventListener("click", toggleCodeHandler(false));
-    }
-    const showAllCode = window.document.getElementById("quarto-show-all-code");
-    if (showAllCode) {
-      showAllCode.addEventListener("click", toggleCodeHandler(true));
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
@@ -734,100 +712,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   <div class="nav-page nav-page-next">
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "The Basics of DQL"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: false</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu"># The First Tools</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>SQL is a broad language with commands for <span class="co">[</span><span class="ot">Introduce about DDL, DQL, DML, DCL and TCL</span><span class="co">]</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="al">![Subset of commands on SQL](images/subset_sql.png)</span>{width=85% fig-align="center" fig-cap="Subset of SQL languages"}</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL is important so the actor can retrieve the data in a way it will help us answer questions by an analytical approach. </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>Bigquery is a very DQL-centric database, by this way our queries are optimized to **SELECT** information (columns) from tables so we can perform analysis and use this data to help us answer questions by data-centric way.</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>To retrieve information from a table, we need to inform for the query engine which table we want to retrieve information **FROM**</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>This leads us for the most basic command to fetch information from any SQL based databases:</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: False</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> custom_display_sql</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT * FROM `bigquery-public-data.openaq.global_air_quality`</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>custom_display_sql(query)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>SELECT * is known as "SELECT star" and is a way to fetch all the columns from the table. Even that this technique looks easy and without effort, it's normally not optimal to run it to queries that contains a high number os columns since it may increase the cloud cost significantly due to the usage of computational resources.</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">Add</span><span class="ot"> figure of bq making computations</span><span class="dt">&gt;</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>Another important command to learn is the filtering functionality "WHERE". With this command we may filter out results for the author's analysis. For example, if we are analyzing taxi-drives, maybe we want to analyze the rides of a specific city. This can be done with the following query:</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: False</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> custom_display_sql</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT * FROM `bigquery-public-data.openaq.global_air_quality`</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE country = "BR"</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>custom_display_sql(query)</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to </span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>-- Sometimes you are going to be dealing with huge number of data, this is why it's important to filter, or to limit the data.</span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: False</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co"># with this I can hide the code that is used</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> custom_display_sql, custom_display_df</span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>query <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT </span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="st">    user_id</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="st">    , COUNT(*) as total</span></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="st">FROM </span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="st">    `project.dataset.table`</span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE </span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="st">    event_date &gt;= '2024-01-01'</span></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY user_id</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY total DESC</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="st">LIMIT 10;</span></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Wrap it in code block markdown with SQL</span></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>custom_display_sql(query)</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>],</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>        [<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">9</span>]</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    ],</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> [<span class="st">'numbers'</span>, <span class="st">'plus_one'</span>, <span class="st">'square'</span>]</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>custom_display_df(data)</span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 
 
