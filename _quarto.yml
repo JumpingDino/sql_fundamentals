@@ -8,6 +8,8 @@ project:
 
 book:
   title: "SQL Fundamentals with BigQuery"
+  page-footer: 
+      left: "Copyright 2025, Rafael Saraiva" 
   chapters:
     - index.qmd
     - about.qmd
