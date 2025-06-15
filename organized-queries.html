@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Grouping the Data – SQL Fundamentals with BigQuery</title>
+<title>The First Steps – SQL Fundamentals with BigQuery</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,18 +20,52 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sql-joins.html" rel="next">
-<link href="./sql-basics.html" rel="prev">
+<link href="./sql-joins.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -69,6 +103,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -83,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./group-basics.html"><span class="chapter-title">Grouping the Data</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./organized-queries.html"><span class="chapter-title">The First Steps</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -127,7 +164,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./group-basics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Grouping the Data</span></a>
+  <a href="./group-basics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Grouping the Data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -137,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./organized-queries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The First Steps</span></a>
+  <a href="./organized-queries.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">The First Steps</span></a>
   </div>
 </li>
     </ul>
@@ -150,18 +187,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#grouping-the-data" id="toc-grouping-the-data" class="nav-link active" data-scroll-target="#grouping-the-data">Grouping the data</a></li>
-  <li><a href="#aggregate-functions" id="toc-aggregate-functions" class="nav-link" data-scroll-target="#aggregate-functions">Aggregate functions</a>
+  <li><a href="#subsets-of-sql-commands" id="toc-subsets-of-sql-commands" class="nav-link active" data-scroll-target="#subsets-of-sql-commands">Subsets of SQL Commands</a></li>
+  <li><a href="#dql-commands" id="toc-dql-commands" class="nav-link" data-scroll-target="#dql-commands">DQL Commands</a>
   <ul class="collapse">
-  <li><a href="#min" id="toc-min" class="nav-link" data-scroll-target="#min">MIN</a></li>
-  <li><a href="#max" id="toc-max" class="nav-link" data-scroll-target="#max">MAX</a></li>
-  <li><a href="#std" id="toc-std" class="nav-link" data-scroll-target="#std">STD</a></li>
-  <li><a href="#avg" id="toc-avg" class="nav-link" data-scroll-target="#avg">AVG</a></li>
-  </ul></li>
-  <li><a href="#filter" id="toc-filter" class="nav-link" data-scroll-target="#filter">Filter</a>
-  <ul class="collapse">
-  <li><a href="#filter-using-where" id="toc-filter-using-where" class="nav-link" data-scroll-target="#filter-using-where">Filter using WHERE</a></li>
-  <li><a href="#filter-using-having" id="toc-filter-using-having" class="nav-link" data-scroll-target="#filter-using-having">Filter using HAVING</a></li>
+  <li><a href="#from" id="toc-from" class="nav-link" data-scroll-target="#from">FROM</a></li>
+  <li><a href="#select" id="toc-select" class="nav-link" data-scroll-target="#select">SELECT</a></li>
+  <li><a href="#as" id="toc-as" class="nav-link" data-scroll-target="#as">AS</a></li>
+  <li><a href="#where" id="toc-where" class="nav-link" data-scroll-target="#where">WHERE</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -171,7 +203,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Grouping the Data</span></h1>
+<h1 class="title"><span class="chapter-title">The First Steps</span></h1>
 </div>
 
 
@@ -188,34 +220,99 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="grouping-the-data" class="level1">
-<h1>Grouping the data</h1>
-<p>[Explain that grouping changes the structure of the data]</p>
-<p>[Create an example]</p>
+<section id="subsets-of-sql-commands" class="level1">
+<h1>Subsets of SQL Commands</h1>
+<p>SQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]</p>
+<p><img src="images/subset_sql.png" class="img-fluid quarto-figure quarto-figure-center" style="width:85.0%" data-fig-cap="Subset of SQL languages" alt="Subset of commands on SQL"> <!-- [![Elephant](elephant.png)](https://en.wikipedia.org/wiki/Elephant) --></p>
+<p>In SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL commands are important so the actor can retrieve the data in a way it will help us answer questions with an analytical approach.</p>
 </section>
-<section id="aggregate-functions" class="level1">
-<h1>Aggregate functions</h1>
-<section id="min" class="level2">
-<h2 class="anchored" data-anchor-id="min">MIN</h2>
+<section id="dql-commands" class="level1">
+<h1>DQL Commands</h1>
+<p>In this section, we introduce the most basic commands that are necessary to run your first queries. We recommend you to run these commands on BigQuery so you can experience your first data retrievals and get used to the UI and langauge.</p>
+<section id="from" class="level2">
+<h2 class="anchored" data-anchor-id="from">FROM</h2>
+<p>In Bigquery, it’s necessary to point out which table you want to take data <strong>FROM</strong>. Every table in bigquery has a table_id, a unique identifier of the table that consists of 3 parts.</p>
+<pre><code>table_id = {project_id}.{dataset_id}.{table_name}</code></pre>
+<ul>
+<li><em>project_id</em>: this is the project in which all Google resources are grouped.</li>
+<li><em>dataset_id</em>: is a unique identifier of the containers of tables. Datasets are group of tables and views which facilitates the management of access through them</li>
+<li><em>table_name</em>: the table_name is uniquely definied in a dataset.</li>
+</ul>
+<p>This leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it’s important to understand which table we are fetching the data</p>
+<div id="07e5e396" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
-<section id="max" class="level2">
-<h2 class="anchored" data-anchor-id="max">MAX</h2>
+<section id="select" class="level2">
+<h2 class="anchored" data-anchor-id="select">SELECT</h2>
+<p>After pointing out the table, it’s necessary to tell the bigquery engine which columns we want to retrieve with the <strong>SELECT</strong> command</p>
+<p>Bigquery is a very DQL-centric database, by this way our queries are optimized to <strong>SELECT</strong> information (columns) from tables and manipulate them accordingly.</p>
+<p>Leading us for the first functional code block:</p>
+<div id="80519802" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>SELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. This technique looks easy and efortless, however it’s not optimal to run this to retrieve information from table that are too big since it may increase the cloud cost significantly due to the usage of computational resources.</p>
 </section>
-<section id="std" class="level2">
-<h2 class="anchored" data-anchor-id="std">STD</h2>
+<section id="as" class="level2">
+<h2 class="anchored" data-anchor-id="as">AS</h2>
+<p>XXX</p>
 </section>
-<section id="avg" class="level2">
-<h2 class="anchored" data-anchor-id="avg">AVG</h2>
-</section>
-</section>
-<section id="filter" class="level1">
-<h1>Filter</h1>
-<p>[Filtering may happen before or after the grouping, and this may affect the results]</p>
-<section id="filter-using-where" class="level3">
-<h3 class="anchored" data-anchor-id="filter-using-where">Filter using WHERE</h3>
-</section>
-<section id="filter-using-having" class="level3">
-<h3 class="anchored" data-anchor-id="filter-using-having">Filter using HAVING</h3>
+<section id="where" class="level2">
+<h2 class="anchored" data-anchor-id="where">WHERE</h2>
+<p>Another important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:</p>
+<div id="5f5646bc" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="ot">"BR"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.</p>
+<div id="49329b51" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display cell-output-markdown">
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    user_id</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    , <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> total</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    `project.dataset.table`</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    event_date <span class="op">&gt;=</span> <span class="st">'2024-01-01'</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> user_id</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> total <span class="kw">DESC</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell-output cell-output-display">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">numbers</th>
+<th data-quarto-table-cell-role="th">plus_one</th>
+<th data-quarto-table-cell-role="th">square</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>4</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
 </section>
@@ -623,14 +720,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./sql-basics.html" class="pagination-link" aria-label="The First Steps">
+      <a href="./sql-joins.html" class="pagination-link" aria-label="The First Steps">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">The First Steps</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sql-joins.html" class="pagination-link" aria-label="The First Steps">
-        <span class="nav-page-text"><span class="chapter-title">The First Steps</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
