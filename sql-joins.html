@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The First Steps – SQL Fundamentals with BigQuery</title>
+<title>Table Joins – SQL Fundamentals with BigQuery</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql-joins.html"><span class="chapter-title">The First Steps</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql-joins.html"><span class="chapter-title">Table Joins</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -170,12 +170,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sql-joins.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">The First Steps</span></a>
+  <a href="./sql-joins.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Table Joins</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./organized-queries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">The First Steps</span></a>
+  <a href="./organized-queries.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">CTEs</span></a>
   </div>
 </li>
     </ul>
@@ -204,7 +204,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">The First Steps</span></h1>
+<h1 class="title"><span class="chapter-title">Table Joins</span></h1>
 </div>
 
 
@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><em>table_name</em>: the table_name is uniquely definied in a dataset.</li>
 </ul>
 <p>This leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it’s important to understand which table we are fetching the data</p>
-<div id="3e72f217" class="cell" data-execution_count="1">
+<div id="c0a83b7c" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -251,7 +251,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>After pointing out the table, it’s necessary to tell the bigquery engine which columns we want to retrieve with the <strong>SELECT</strong> command</p>
 <p>Bigquery is a very DQL-centric database, by this way our queries are optimized to <strong>SELECT</strong> information (columns) from tables and manipulate them accordingly.</p>
 <p>Leading us for the first functional code block:</p>
-<div id="0ff9a505" class="cell" data-execution_count="2">
+<div id="88f4da54" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -265,14 +265,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="where" class="level2">
 <h2 class="anchored" data-anchor-id="where">WHERE</h2>
 <p>Another important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:</p>
-<div id="7f1c9fe3" class="cell" data-execution_count="3">
+<div id="ac566d44" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> `bigquery<span class="op">-</span><span class="kw">public</span><span class="op">-</span><span class="kw">data</span>.openaq.global_air_quality`</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> country <span class="op">=</span> <span class="ot">"BR"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>To reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.</p>
-<div id="21b9749f" class="cell" data-execution_count="4">
+<div id="1b1948ce" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    user_id</span>
@@ -726,8 +726,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./organized-queries.html" class="pagination-link" aria-label="The First Steps">
-        <span class="nav-page-text"><span class="chapter-title">The First Steps</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./organized-queries.html" class="pagination-link" aria-label="CTEs">
+        <span class="nav-page-text"><span class="chapter-title">CTEs</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

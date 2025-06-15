@@ -122,101 +122,101 @@
   {
     "objectID": "sql-joins.html",
     "href": "sql-joins.html",
-    "title": "The First Steps",
+    "title": "Table Joins",
     "section": "",
     "text": "Subsets of SQL Commands\nSQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]\nIn SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL commands are important so the actor can retrieve the data in a way it will help us answer questions with an analytical approach.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Table Joins</span>"
     ]
   },
   {
     "objectID": "sql-joins.html#from",
     "href": "sql-joins.html#from",
-    "title": "The First Steps",
+    "title": "Table Joins",
     "section": "FROM",
     "text": "FROM\nIn Bigquery, it’s necessary to point out which table you want to take data FROM. Every table in bigquery has a table_id, a unique identifier of the table that consists of 3 parts.\ntable_id = {project_id}.{dataset_id}.{table_name}\n\nproject_id: this is the project in which all Google resources are grouped.\ndataset_id: is a unique identifier of the containers of tables. Datasets are group of tables and views which facilitates the management of access through them\ntable_name: the table_name is uniquely definied in a dataset.\n\nThis leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it’s important to understand which table we are fetching the data\n\n\nFROM `bigquery-public-data.openaq.global_air_quality`",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Table Joins</span>"
     ]
   },
   {
     "objectID": "sql-joins.html#select",
     "href": "sql-joins.html#select",
-    "title": "The First Steps",
+    "title": "Table Joins",
     "section": "SELECT",
     "text": "SELECT\nAfter pointing out the table, it’s necessary to tell the bigquery engine which columns we want to retrieve with the SELECT command\nBigquery is a very DQL-centric database, by this way our queries are optimized to SELECT information (columns) from tables and manipulate them accordingly.\nLeading us for the first functional code block:\n\n\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\n\n\nSELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. This technique looks easy and efortless, however it’s not optimal to run this to retrieve information from table that are too big since it may increase the cloud cost significantly due to the usage of computational resources.",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Table Joins</span>"
     ]
   },
   {
     "objectID": "sql-joins.html#as",
     "href": "sql-joins.html#as",
-    "title": "The First Steps",
+    "title": "Table Joins",
     "section": "AS",
     "text": "AS\nXXX",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Table Joins</span>"
     ]
   },
   {
     "objectID": "sql-joins.html#where",
     "href": "sql-joins.html#where",
-    "title": "The First Steps",
+    "title": "Table Joins",
     "section": "WHERE",
     "text": "WHERE\nAnother important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:\n\n\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\nWHERE country = \"BR\"\n\n\nTo reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.\n\n\nSELECT \n    user_id\n    , COUNT(*) as total\nFROM \n    `project.dataset.table`\nWHERE \n    event_date &gt;= '2024-01-01'\nGROUP BY user_id\nORDER BY total DESC\nLIMIT 10;\n\n\n\n\n\nnumbers\nplus_one\nsquare\n\n\n\n\n1\n2\n1\n\n\n2\n3\n4\n\n\n3\n4\n9",
     "crumbs": [
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Table Joins</span>"
     ]
   },
   {
     "objectID": "organized-queries.html",
     "href": "organized-queries.html",
-    "title": "The First Steps",
+    "title": "CTEs",
     "section": "",
     "text": "Subsets of SQL Commands\nSQL is a broad language with commands for [Introduce about DDL, DQL, DML, DCL and TCL]\nIn SQL, DQL (Data-Query Language) is a subset of commands that is focused on retrieving data from tables. The knowledge on this specific subset of SQL commands are important so the actor can retrieve the data in a way it will help us answer questions with an analytical approach.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>CTEs</span>"
     ]
   },
   {
     "objectID": "organized-queries.html#from",
     "href": "organized-queries.html#from",
-    "title": "The First Steps",
+    "title": "CTEs",
     "section": "FROM",
     "text": "FROM\nIn Bigquery, it’s necessary to point out which table you want to take data FROM. Every table in bigquery has a table_id, a unique identifier of the table that consists of 3 parts.\ntable_id = {project_id}.{dataset_id}.{table_name}\n\nproject_id: this is the project in which all Google resources are grouped.\ndataset_id: is a unique identifier of the containers of tables. Datasets are group of tables and views which facilitates the management of access through them\ntable_name: the table_name is uniquely definied in a dataset.\n\nThis leads us for the below piece of code which points out a public table on Bigquery, the code is not functional yet. However it’s important to understand which table we are fetching the data\n\n\nFROM `bigquery-public-data.openaq.global_air_quality`",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>CTEs</span>"
     ]
   },
   {
     "objectID": "organized-queries.html#select",
     "href": "organized-queries.html#select",
-    "title": "The First Steps",
+    "title": "CTEs",
     "section": "SELECT",
     "text": "SELECT\nAfter pointing out the table, it’s necessary to tell the bigquery engine which columns we want to retrieve with the SELECT command\nBigquery is a very DQL-centric database, by this way our queries are optimized to SELECT information (columns) from tables and manipulate them accordingly.\nLeading us for the first functional code block:\n\n\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\n\n\nSELECT * is known as “SELECT star” and is a way to fetch all the columns from the table. This technique looks easy and efortless, however it’s not optimal to run this to retrieve information from table that are too big since it may increase the cloud cost significantly due to the usage of computational resources.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>CTEs</span>"
     ]
   },
   {
     "objectID": "organized-queries.html#as",
     "href": "organized-queries.html#as",
-    "title": "The First Steps",
+    "title": "CTEs",
     "section": "AS",
     "text": "AS\nXXX",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>CTEs</span>"
     ]
   },
   {
     "objectID": "organized-queries.html#where",
     "href": "organized-queries.html#where",
-    "title": "The First Steps",
+    "title": "CTEs",
     "section": "WHERE",
     "text": "WHERE\nAnother important command to learn is the filtering functionality “WHERE”. With this command we may filter out results for the author’s analysis. For example, if we are analyzing air quality, we may want to analyze the data from a specific country, for example, Brazil. This can be done with the following query:\n\n\nSELECT * FROM `bigquery-public-data.openaq.global_air_quality`\nWHERE country = \"BR\"\n\n\nTo reduce the usage of computational resources (costs), one way is to filter the number of columns you are currently retrieving. Another way is to – Sometimes you are going to be dealing with huge number of data, this is why it’s important to filter, or to limit the data.\n\n\nSELECT \n    user_id\n    , COUNT(*) as total\nFROM \n    `project.dataset.table`\nWHERE \n    event_date &gt;= '2024-01-01'\nGROUP BY user_id\nORDER BY total DESC\nLIMIT 10;\n\n\n\n\n\nnumbers\nplus_one\nsquare\n\n\n\n\n1\n2\n1\n\n\n2\n3\n4\n\n\n3\n4\n9",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The First Steps</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>CTEs</span>"
     ]
   }
 ]
