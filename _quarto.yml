@@ -22,4 +22,4 @@ format:
     toc-expand: 5
 
 crossref:
-  chapters: true
+  chapters: false
