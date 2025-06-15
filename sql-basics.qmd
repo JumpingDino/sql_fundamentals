@@ -1,5 +1,5 @@
 ---
-title: "Basic SQL"
+title: "The First Steps"
 format:
   html:
     code-fold: false

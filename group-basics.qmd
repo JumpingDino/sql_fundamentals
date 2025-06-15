@@ -1,0 +1,36 @@
+---
+title: "Grouping the Data"
+format:
+  html:
+    code-fold: false
+    code-tools: false
+jupyter: python3
+---
+
+
+# Grouping the data
+
+[Explain that grouping changes the structure of the data]
+
+[Create an example]
+
+# Aggregate functions
+
+## MIN
+
+## MAX
+
+## STD
+
+## AVG
+
+# Filter
+
+[Filtering may happen before or after the grouping, and this may affect the results]
+
+### Filter using WHERE
+
+
+### Filter using HAVING
+
+
